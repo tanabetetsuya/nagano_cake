@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10">
+      <h1>注文確認画面</h1>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <table class="table table-bordered col-lg-8">
+          <thead>
+            <tr class="bg-light">
+              <th>商品名</th>
+              <th>単価（税込）</th>
+              <th>数量</th>
+              <th>小計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sum = 0 %>
+            <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= cart_item.item.name %></td>
+              <% a = (cart_item.item.price)*1.1 %>
+              <td><%= a.floor %></td>
+              <td><%= cart_item.amount %></td>
+              <td><%= a.floor*cart_item.amount %></td>
+              <% sub_total = a.floor*cart_item.amount %>
+              <% @sum += sub_total %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+            <table class="table table-bordered ml-5 col-lg-3">
+              <tr>
+                <th class="bg-light">送料</th>
+
+                <td><%= 800 %></td>
+              </tr>
+              <tr>
+                <th class="bg-light">商品合計</th>
+                <td><%= @sum %></td>
+              </tr>
+              <tr>
+                <th class="bg-light">請求金額</th>
+                <td><%= @sum + 800 %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <table class="table table-borderless">
+                <tr>
+                  <th>支払い方法</th>
+                  <td class="ml-3"><%= @order.payment_method %></td>
+                </tr>
+                <tr>
+                  <th>お届け先</th>
+                  <td class="ml-3">〒<%= @order.postal_code %><%= @order.order_address %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+            <%= form_with model: @order, url: '/orders', method: :post, local: true do |f| %>
+              <%= f.hidden_field :order_address %>
+              <%= f.hidden_field :name %>
+              <%= f.hidden_field :postal_code %>
+              <%= f.hidden_field :payment_method %>
+              <% @order.purchase_price = @sum + 800 %>
+              <%= f.hidden_field :purchase_price %>
+              <% @order.shipping = 800 %>
+              <% f.hidden_field :shipping %>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2 mx-auto">
+              <%= f.submit '注文を確定する', class: 'btn btn-success' %>
+            </div>
+          </div>
+        </div>
+        <% end %>

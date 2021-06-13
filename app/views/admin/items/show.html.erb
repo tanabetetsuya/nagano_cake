@@ -1,0 +1,43 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h1>商品詳細</h1>
+    </div>
+  </div>
+  <div class="row media">
+    <div class="media-left">
+      <%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
+    </div>
+    <div class="media-body ml-5">
+      <table class="mt-5">
+        <tr>
+          <th>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td><%= @item.genre.name %></td>
+        </tr>
+        <tr>
+          <th>税込価格（税抜価格）</th>
+          <% a = @item.price*1.1 %>
+          <td><%= a.floor %>(<%= @item.price %>)円</td>
+        </tr>
+        <tr>
+          <th>販売ステータス</th>
+          <td><%= @item.is_active %></td>
+        </tr>
+        <tr>
+          <th><%= link_to '編集する', edit_admin_item_path(@item), class: 'btn btn-success mt-5' %></th>
+        </tr>
+      </table>
+      </div>
+    </div>
+  </div>
+

@@ -1,0 +1,22 @@
+
+
+
+<div class="container">
+  <div class="row">
+
+        <div class="card border-0 mt-5 col-lg-4">
+          <%= attachment_image_tag @item, :image, :fill, 300, 300, fallback: "no_image.jpg" %>
+        </div>
+        <div class="card border-0 mt-5 col-lg-8">
+          <div class="card-body">
+            <h3 class="card-title m-5"><%= @item.name %></h3>
+            <p class="card-text m-5"><%= @item.introduction %></p>
+            <% a = @item.price*1.1 %>
+            <div class="m-5">¥ <%= a.floor  %> (税込）</div>
+            <%= render 'cart_items/newcart', {cart_item: @cart_item, item: @item} %>
+          </div>
+        </div>
+    </div>
+
+  </div>
+

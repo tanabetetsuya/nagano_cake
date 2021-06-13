@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10">
+      <h1>注文履歴詳細</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h4>注文情報</h4>
+      <table class="table table-bordered">
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td><div>〒<%= @order.postal_code %></div><div><%= @order.order_address %></div></td>
+        </tr>
+        <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <th>ステータス</th>
+          <td><%= @order.order_status %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-offset-1 col-lg-3">
+      <h4>請求情報</h4>
+      <table class="table table-bordered">
+        <tr>
+          <th class="bg-light">商品合計</th>
+          <% @sum = 0 %>
+          <th><% @order.order_items.each do |order_item| %>
+              <% a = order_item.amount %>
+              <% b = order_item.order_item_price %>
+              <% @sum += a*b %>
+              <% end %>
+              <%= @sum %>
+          </th>
+        </tr>
+        <tr>
+          <th class="bg-light">配送料</th>
+          <th><%= 800 %></th>
+        </tr>
+        <tr>
+          <th class="bg-light">ご請求額</th>
+          <th><%= @sum + 800 %></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-10">
+      <h4>注文内容</h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="bg-light">
+            <th>商品</th>
+            <th>単価（税込）</th>
+            <th>個数</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.item.name %></td>
+            <td><%= order_item.order_item_price %></td>
+            <td><%= order_item.amount %></td>
+            <td><%= order_item.order_item_price*order_item.amount %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

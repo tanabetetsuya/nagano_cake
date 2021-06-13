@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10">
+      <h1>ジャンル編集</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-10">
+      <%= form_with model: @genre, url: "/admin/genres/#{@genre.id}", local: true do |f| %>
+      <table class="table table-borderless">
+        <tr>
+          <th>ジャンル名</th>
+          <th><%= f.text_field :name %></th>
+          <th><%= f.submit '変更を保存', class: 'btn btn-success' %></th>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>

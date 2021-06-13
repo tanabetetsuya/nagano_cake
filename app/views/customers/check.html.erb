@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mx-auto mt-5 pt-5">
+      <h4 class="text-center">本当に退会しますか</h4>
+      <p class="text-center">
+        退会すると、会員登録情報やこれまでの購入履歴が閲覧
+        できなくなります。<br>
+        退会する場合は『退会する』をクリックして
+        ください。
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 mx-auto">
+      <table class="table table-borderless">
+        <tr>
+          <th><%= link_to '退会しない', customers_path, class: 'btn btn-primary d-inline' %></th>
+          <td><%= link_to '退会する', customers_resign_path, method: :put, class: 'btn btn-danger d-inline' %></td>
+        </tr>
+        
+      </table>
+    </div>
+  </div>
+</div>

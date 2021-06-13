@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 mx-auto">
+      <h1>商品一覧</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10">
+      <h3>新着商品</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex flex-wrap w-80 mx-auto">
+
+      <% @items.each do |item| %>
+      <div class="m-3">
+        <%= link_to item_path(item.id) do %>
+        <div><%= attachment_image_tag item, :image, :fill, 200, 200, fallback: "no_image.jpg" %></div>
+        <% end %>
+        <div><%= item.name %></div>
+        <div><%= item.price %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
