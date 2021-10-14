@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'tests/top'
   root to: 'homes#top'
   get '/home/about' => 'homes#about'
   resources :items, only: [:show, :index]
